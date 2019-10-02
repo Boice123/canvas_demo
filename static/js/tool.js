@@ -23,3 +23,30 @@ window.tools.getMouse = function(element) {
     })
     return mouse
 }
+
+window.tools.getKey = function() {
+    var key = {}
+    window.addEventListener('keydown', function(e) {
+        if (e.keyCode === 38 || e.keyCode === 87) {
+            key.direction = 'up'
+        } else if (e.keyCode === 39 || e.keyCode === 68) {
+            key.direction = 'right'
+        } else if (e.keyCode === 40 || e.keyCode === 83) {
+            key.direction = 'down'
+        } else if (e.keyCode === 37 || e.keyCode === 65) {
+            key.direction = 'left'
+        } else {
+            key.direction = ''
+        }
+    }, false)
+    return key
+}
+
+window.tools.getRandomColor = function() {
+    return '#' + 
+    (function(color) {
+        let c = (color += '0123456789abcdef'[Math.floor(Math.random() * 16)]) && (color.length === 6) ? color : arguments.callee(color)
+        console.log(c)
+        return c
+    })('')
+}

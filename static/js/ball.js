@@ -6,6 +6,7 @@ function Ball(x, y, radius, color) {
 
     this.scaleX = 1
     this.scaleY = 1
+    console.log(this.color)
 }
 
 Ball.prototype = {
