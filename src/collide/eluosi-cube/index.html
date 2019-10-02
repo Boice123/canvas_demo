@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src='../../../static/js/tool.js'></script>
+    <script src='./box.js'></script>
+    <script>
+        function $$(id) {
+            return document.getElementById(id)
+        }
+        window.onload = function() {
+            var cnv = $$('canvas')
+            var cxt = cnv.getContext("2d")
+
+            var boxes = []
+            var activeBox = createBox()
+            var vy = 1.5
+
+            var key = tools.getKey()
+            window.addEventListener('keydown', function() {
+                switch(key.direction) {
+                    case 'down':
+                        activeBox.y += 5
+                        break
+                    case 'left':
+                        activeBox.x -= 10
+                        break
+                    case 'right':
+                        activeBox.x += 10
+                        break
+                }
+            }, false)
+
+            function createBox() {
+                var x = Math.random() * cnv.width
+                var y = 0
+                var width = Math.random() * 40 + 10
+                var height = Math.random() * 40 + 10
+                var color = tools.getRandomColor()
+                var box = new Box(x, y, width, height, color)
+                boxes.push(box)
+                return box
+            }
+
+
+            function frame() {
+                window.requestAnimationFrame(frame)
+                cxt.clearRect(0, 0, cnv.width, cnv.height)
+
+                activeBox.y += vy
+                if (activeBox.y > cnv.height - activeBox.height) {
+                    activeBox.y = cnv.height - activeBox.height
+                    activeBox = createBox()
+                }
+
+                boxes.forEach((box) => {
+                    if (activeBox != box && tools.checkRect(activeBox, box)) {
+                        activeBox.y = box.y - activeBox.height
+                        activeBox = createBox()
+                    }
+                    box.fill(cxt)
+                })
+            }
+            frame()
+
+        }
+
+    </script>
+    <canvas id="canvas" width="200" height="150" style="border: 1px solid silver;"></canvas>
+</body>
+</html>

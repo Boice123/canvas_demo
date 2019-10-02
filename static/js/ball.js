@@ -31,5 +31,14 @@ Ball.prototype = {
         cxt.closePath()
         cxt.fill()
         cxt.restore()
+    },
+    getRect: function() {
+        var rect = {
+            x: this.x - this.radius,
+            y: this.y - this.radius,
+            width: this.radius * 2,
+            height: this.radius * 2
+        }
+        return rect
     }
 }

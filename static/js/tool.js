@@ -46,7 +46,17 @@ window.tools.getRandomColor = function() {
     return '#' + 
     (function(color) {
         let c = (color += '0123456789abcdef'[Math.floor(Math.random() * 16)]) && (color.length === 6) ? color : arguments.callee(color)
-        console.log(c)
         return c
     })('')
+}
+
+window.tools.checkRect = function(rectA, rectB) {
+    // return !(rectA.x + rectA.width < rectB.x ||
+    //         rectB.x + rectB.width < rectA.x ||
+    //         rectA.y + rectA.height < rectB.y ||
+    //         rectB.y + rectB.height < rectA.y )
+        return (rectA.x + rectA.width > rectB.x &&
+            rectB.x + rectB.width > rectA.x &&
+            rectA.y + rectA.height > rectB.y &&
+            rectB.y + rectB.height > rectA.y )
 }
