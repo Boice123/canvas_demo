@@ -51,12 +51,19 @@ window.tools.getRandomColor = function() {
 }
 
 window.tools.checkRect = function(rectA, rectB) {
-    // return !(rectA.x + rectA.width < rectB.x ||
-    //         rectB.x + rectB.width < rectA.x ||
-    //         rectA.y + rectA.height < rectB.y ||
-    //         rectB.y + rectB.height < rectA.y )
-        return (rectA.x + rectA.width > rectB.x &&
-            rectB.x + rectB.width > rectA.x &&
-            rectA.y + rectA.height > rectB.y &&
-            rectB.y + rectB.height > rectA.y )
+    return (rectA.x + rectA.width > rectB.x &&
+        rectB.x + rectB.width > rectA.x &&
+        rectA.y + rectA.height > rectB.y &&
+        rectB.y + rectB.height > rectA.y )
+}
+
+window.tools.checkCircle = function(circleA, circleB) {
+    var dx = circleB.x - circleA.x
+    var dy = circleB.y - circleA.y
+    var distance = Math.sqrt(dx*dx + dy*dy)
+    if (distance < (circleA.radius + circleB.radius)) {
+        return true
+    } else {
+        return false
+    }
 }

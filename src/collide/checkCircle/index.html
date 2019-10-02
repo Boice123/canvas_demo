@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src='../../../static/js/tool.js'></script>
+    <script src='../../../static/js/ball.js'></script>
+    <script>
+        function $$(id) {
+            return document.getElementById(id)
+        }
+        window.onload = function() {
+            var cnv = $$('canvas')
+            var cxt = cnv.getContext("2d")
+
+            var ballA = new Ball(0, cnv.height / 2, 12, '#FF6699')
+            var ballB = new Ball(cnv.width, cnv.height / 2, 12, '#66CCFF')
+            var vx = 2
+
+            function frame() {
+                window.requestAnimationFrame(frame)
+                cxt.clearRect(0, 0, cnv.width, cnv.height)
+
+                ballA.x += vx
+                ballB.x += -vx
+                if (tools.checkCircle(ballB,ballA)) {
+                    vx = -vx
+                }
+                ballA.fill(cxt)
+                ballB.fill(cxt)
+            }
+            frame()
+
+        }
+
+    </script>
+    <canvas id="canvas" width="200" height="150" style="border: 1px solid silver;"></canvas>
+</body>
+</html>
