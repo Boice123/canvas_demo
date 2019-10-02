@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src='../../static/js/tool.js'></script>
+    <script src='../../static/js/ball.js'></script>
+    <script>
+        function $$(id) {
+            return document.getElementById(id)
+        }
+        window.onload = function() {
+            var cnv = $$('canvas')
+            var cxt = cnv.getContext("2d")
+
+            // 实例化一个小球
+            var ball = new Ball(cnv.width / 2, 0)
+            var vy = 0
+            var gravity = 0.2
+            var bounce = -0.8
+
+            function frame() {
+                window.requestAnimationFrame(frame)
+                cxt.clearRect(0, 0, cnv.width, cnv.height)
+
+                ball.y += vy
+                if (ball.y > cnv.height - ball.radius) {
+                    ball.y = cnv.height - ball.radius
+                    vy = vy * bounce
+                    // console.log('碰到了')
+                }
+                ball.fill(cxt)
+
+                vy += gravity
+                // console.log(vy)
+            }
+            frame()
+
+        }
+
+    </script>
+    <canvas id="canvas" width="200" height="150" style="border: 1px solid silver;"></canvas>
+</body>
+</html>

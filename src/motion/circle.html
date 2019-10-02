@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src='../../static/js/tool.js'></script>
+    <script src='../../static/js/ball.js'></script>
+    <script>
+        function $$(id) {
+            return document.getElementById(id)
+        }
+        window.onload = function() {
+            var cnv = $$('canvas')
+            var cxt = cnv.getContext("2d")
+
+            // 实例化一个小球
+            var ball = new Ball(100, 25)
+            var centerX = cnv.width / 2
+            var centerY = cnv.height / 2
+            var radius = 50
+            var angle = 0
+
+            function frame() {
+                window.requestAnimationFrame(frame)
+                cxt.clearRect(0, 0, cnv.width, cnv.height)
+                // console.log(cxt)
+
+                cxt.beginPath()
+                cxt.arc(centerX, centerY, 50, 0, 360 * Math.PI / 180, false)
+                cxt.closePath()
+                cxt.stroke()
+
+                ball.x = centerX + Math.cos(angle) * radius
+                ball.y = centerY + Math.sin(angle) * radius
+                ball.fill(cxt)
+
+                angle += 0.05
+            }
+            frame()
+
+        }
+
+    </script>
+    <canvas id="canvas" width="200" height="150" style="border: 1px solid silver;"></canvas>
+</body>
+</html>
