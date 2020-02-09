@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="rainC"></canvas>
+    <script>
+        let rainCanvas = document.getElementById('rainC');
+        let bufferRainCanvas = document.getElementById('rainC');
+        let rainContext = rainCanvas.getContext('2d');
+        let buffRainContext = bufferRainCanvas.getContext('2d');
+        let width = 0;
+        let height = 0;
+        let init = [];
+        let maxParts = 300;
+        let particles = [];
+
+        rainCanvas.width = window.innerWidth;
+        rainCanvas.height = window.innerHeight;
+        bufferRainCanvas.width = window.innerWidth;
+        bufferRainCanvas.height = window.innerHeight;
+
+        width = rainCanvas.width;
+        height = rainCanvas.height;
+
+        // rainContext.strokeStyle = 'rgba(175, 195, 225, 0.6)';
+        // rainContext.lineWidth = 0.5;
+        // rainContext.lineCap = 'round';
+        buffRainContext.strokeStyle = 'rgba(175, 195, 225, 0.6)';
+        buffRainContext.lineWidth = 0.5;
+        buffRainContext.lineCap = 'round';
+
+        for (var i = 0; i < maxParts; i++) {
+            init.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                l: Math.random() * 1,
+                // xs: -4 + Math.random() * 4 + 2,
+                xs: -3,
+                ys: Math.random() * 10 + 10
+            });
+
+            particles[i] = init[i];
+        }
+
+        function draw() {
+            rainContext.clearRect(0, 0, width, height);
+            buffRainContext.clearRect(0, 0, width, height);
+
+            for (var i = 0; i < particles.length; i++) {
+                // console.log(i)
+                var p = particles[i];
+
+                buffRainContext.beginPath();
+                buffRainContext.moveTo(p.x, p.y);
+                buffRainContext.lineTo(p.x + p.xs, p.y + p.ys);
+                buffRainContext.stroke()
+
+                p.x += p.xs
+                p.y += p.ys
+
+                if (p.x > width || p.y > height) {
+                    p.x = Math.random() * width;
+                    p.y = -20;
+                }
+            }
+            rainContext.drawImage(bufferRainCanvas, 0, 0);
+            // move();
+        }
+
+        setInterval(draw, 30);
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="snowC"></canvas>
+    <script>
+        let snowCanvas = document.getElementById('snowC');
+        let buffsnowCanvas = document.getElementById('snowC');
+        let snowContext = snowCanvas.getContext('2d');
+        let buffsnowContext = buffsnowCanvas.getContext('2d');
+        let width = 0;
+        let height = 0;
+        let init = [];
+        let maxParts = 300;
+        let particles = [];
+
+        snowCanvas.width = window.innerWidth;
+        snowCanvas.height = window.innerHeight;
+        buffsnowCanvas.width = window.innerWidth;
+        buffsnowCanvas.height = window.innerHeight;
+
+        width = snowCanvas.width;
+        height = snowCanvas.height;
+
+        snowContext.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        buffsnowContext.fillStyle = 'rgba(255, 255, 255, 0.8)';
+
+        function Snowflake() {
+            this.x = 0;
+            this.y = 0;
+            this.vy = 0;
+            this.vx = 0;
+            this.r = 0;
+            this.reset();
+        }
+
+        Snowflake.prototype.reset = function() {
+            this.x = Math.random() * width
+            this.y = Math.random() * -height
+            this.vy = 1 + Math.random() * 3;
+            this.vx = 0.5- Math.random()
+            this.r = Math.random() * 2;
+            this.o = 0.5 + Math.random() * 0.5;
+        }
+
+        for (let i = 0 ; i < maxParts; i++) {
+            let snow = new Snowflake()
+            snow.reset()
+            particles.push(snow)
+        }
+
+        function draw() {
+            console.log('update')
+            snowContext.clearRect(0, 0, width, height);
+            buffsnowContext.clearRect(0, 0, width, height);
+
+            for (var i = 0; i < particles.length; i++) {
+                var p = particles[i];
+                p.x += p.vx
+                p.y += p.vy
+
+                buffsnowContext.globalAlpha = p.o
+                buffsnowContext.beginPath();
+                buffsnowContext.arc(p.x, p.y, p.r, 0, Math.PI * 2, false)
+                buffsnowContext.closePath()
+                buffsnowContext.fill()
+                if (p.y > height) {
+                    p.reset();
+                }
+            }
+            snowContext.drawImage(buffsnowCanvas, 0, 0);
+            window.requestAnimationFrame(draw)
+        }
+
+        window.requestAnimationFrame(draw)
+    </script>
+</body>
+</html>
