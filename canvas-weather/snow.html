@@ -15,9 +15,9 @@
     <canvas id="snowC"></canvas>
     <script>
         let snowCanvas = document.getElementById('snowC');
-        let buffsnowCanvas = document.getElementById('snowC');
+        // let buffsnowCanvas = document.getElementById('snowC');
         let snowContext = snowCanvas.getContext('2d');
-        let buffsnowContext = buffsnowCanvas.getContext('2d');
+        // let buffsnowContext = buffsnowCanvas.getContext('2d');
         let width = 0;
         let height = 0;
         let init = [];
@@ -26,14 +26,14 @@
 
         snowCanvas.width = window.innerWidth;
         snowCanvas.height = window.innerHeight;
-        buffsnowCanvas.width = window.innerWidth;
-        buffsnowCanvas.height = window.innerHeight;
+        // buffsnowCanvas.width = window.innerWidth;
+        // buffsnowCanvas.height = window.innerHeight;
 
         width = snowCanvas.width;
         height = snowCanvas.height;
 
         snowContext.fillStyle = 'rgba(255, 255, 255, 0.8)';
-        buffsnowContext.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        // buffsnowContext.fillStyle = 'rgba(255, 255, 255, 0.8)';
 
         function Snowflake() {
             this.x = 0;
@@ -62,23 +62,23 @@
         function draw() {
             console.log('update')
             snowContext.clearRect(0, 0, width, height);
-            buffsnowContext.clearRect(0, 0, width, height);
+            // buffsnowContext.clearRect(0, 0, width, height);
 
             for (var i = 0; i < particles.length; i++) {
                 var p = particles[i];
                 p.x += p.vx
                 p.y += p.vy
 
-                buffsnowContext.globalAlpha = p.o
-                buffsnowContext.beginPath();
-                buffsnowContext.arc(p.x, p.y, p.r, 0, Math.PI * 2, false)
-                buffsnowContext.closePath()
-                buffsnowContext.fill()
+                snowContext.globalAlpha = p.o
+                snowContext.beginPath();
+                snowContext.arc(p.x, p.y, p.r, 0, Math.PI * 2, false)
+                snowContext.closePath()
+                snowContext.fill()
                 if (p.y > height) {
                     p.reset();
                 }
             }
-            snowContext.drawImage(buffsnowCanvas, 0, 0);
+            snowContext.drawImage(snowCanvas, 0, 0);
             window.requestAnimationFrame(draw)
         }
 
