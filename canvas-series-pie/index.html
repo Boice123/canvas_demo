@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas1" width="200" height="200"></canvas>
+    <script>
+        function drawCircle(canvasId,data_arr,color_arr) {
+            var c=document.getElementById(canvasId);
+            var ctx=c.getContext("2d");//图画绘制对象
+            var radius=c.width*0.4;//半径
+            var ox=c.width*0.5, oy=c.width*0.5;//圆心
+            var startAngle = 1.5*Math.PI
+            var endAngle = 1.5*Math.PI
+            ctx.save();
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            ctx.shadowBlur = 14; // 模糊尺寸
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+            ctx.arc(ox,oy,radius,0,2 * Math.PI,false);
+            ctx.fill();
+            ctx.restore();
+            for(var i=0;i<data_arr.length;i++){
+                endAngle=endAngle+data_arr[i]*Math.PI*2;
+                ctx.fillStyle=color_arr[i];
+                ctx.strokeStyle="white"
+                ctx.lineWidth = "5"
+                ctx.beginPath();
+                ctx.moveTo(ox,oy);
+                ctx.arc(ox,oy,radius,startAngle,endAngle,false);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke()
+                startAngle=endAngle;
+            }
+            ctx.moveTo(ox,oy);
+            ctx.font='normal bolder 36px 微软雅黑';
+            ctx.fillStyle='#fff';
+            ctx.lineWidth = "2"
+            ctx.strokeStyle="blue"
+            ctx.textBaseline = 'middle'
+            ctx.textAlign='center'
+            ctx.fillText((data_arr[0]/ data_arr[1] * 100).toFixed() + '%',c.width/2, c.height/2);
+            ctx.strokeText((data_arr[0]/ data_arr[1] * 100).toFixed() + '%',c.width/2, c.height/2);
+        }
+        function init(){
+            var data_arr=[0.3, 0.7]; //各类的百分比
+            var color_arr=["red","#ccc"];//现实的颜色
+            drawCircle("canvas1",data_arr,color_arr);//调用函数
+        }
+        init()
+    </script>
+</body>
+</html>
