@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body {
+        background-color: #ccc;
+    }
+    </style>
+</head>
+<body>
+    <script src="./util.js"></script>
+    <script src="./progress.js"></script>
+    <script src="./confetti.js"></script>
+    <script>
+        (function() {
+            var DURATION = 8000,
+                LENGTH = 120;
+
+            new Confetti({
+                width: window.innerWidth,
+                height: window.innerHeight,
+                length: LENGTH,
+                duration: DURATION
+            });
+        })();
+
+    </script>
+</body>
+</html>
