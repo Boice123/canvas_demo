@@ -13,6 +13,7 @@ var Confetti = function () {
             duration: params.duration,
             isLoop: true
         })
+        this.speedRange = params.speedRange || 10
         this.sprites = []
         this.canvas.style.cssText = ["display: block", "position: absolute", "top: 0", "left: 0","pointer-events: none"].join(";");
 
@@ -38,6 +39,8 @@ var Confetti = function () {
                 initX: Math.random() * 400,
                 initY: 0
             }
+
+            canvas.speed = this.speedRange / 2 + Math.random() * (this.speedRange / 2); // 5-10
 
             ctx.save();
             ctx.fillStyle = Confetti.CONST.COLORS[Math.random() * Confetti.CONST.COLORS.length | 0];
