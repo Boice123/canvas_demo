@@ -58,7 +58,7 @@ var Confetti = function () {
         this.canvas.height = this.height;
 
         for (var i = 0; i < this.length; ++i) {
-            this.ctx.save();                                   // 0-5     50      一次周期的百分比   
+            this.ctx.save();                                  
             this.ctx.translate(this.sprites[i].position.initX +this.sprites[i].rotation * Confetti.CONST.ROTATION_RATE * progress, this.sprites[i].position.initY + progress * (this.height + this.yRange));
             this.ctx.rotate(this.sprites[i].rotation);
             this.ctx.drawImage(this.sprites[i], -Confetti.CONST.SPRITE_WIDTH * Math.abs(Math.sin(progress * Math.PI * 2 * this.sprites[i].speed)) / 2, -Confetti.CONST.SPRITE_HEIGHT / 2, Confetti.CONST.SPRITE_WIDTH * Math.abs(Math.sin(progress * Math.PI * 2 * this.sprites[i].speed)), Confetti.CONST.SPRITE_HEIGHT);

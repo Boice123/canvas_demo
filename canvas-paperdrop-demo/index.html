@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }</style>
+</head>
+<body>
+    <script src="./util.js"></script>
+    <script src="./progress.js"></script>
+    <script src="./confetti.js"></script>
+    <script>
+    // let sprites = []
+    // let confetiiNum = 2
+    // let COLORS = ["#EF5350", "#EC407A", "#AB47BC", "#7E57C2", "#5C6BC0", "#42A5F5", "#29B6F6", "#26C6DA", "#26A69A", "#66BB6A", "#9CCC65", "#D4E157", "#FFEE58", "#FFCA28", "#FFA726", "#FF7043", "#8D6E63", "#BDBDBD", "#78909C"]
+    // let canvas = document.getElementById("canvas")
+    // let context = canvas.getContext("2d")
+    // canvas.width = 400
+    // canvas.height = 400
+    
+    // function buildConfetii() {
+    //     for (let i = 0; i < confetiiNum; i++) {
+    //         let can = document.createElement("canvas")
+    //         let ctx = can.getContext("2d")
+    //         can.width = 50
+    //         can.height = 50
+    //         can.position = {
+    //             initX: Math.random() * 400,
+    //             initY: 0
+    //         }
+
+    //         ctx.save();
+    //         ctx.fillStyle = COLORS[Math.random() * COLORS.length | 0];
+    //         ctx.fillRect(0, 0, canvas.width, canvas.height);
+    //         ctx.strokeStyle = "#000"
+    //         ctx.strokeRect(0, 0, canvas.width, canvas.height)
+    //         ctx.restore();
+
+    //         sprites.push(can)
+    //     }
+    // }
+
+    
+    // buildConfetii()
+    // this.progress = new Progress({
+    //     duration: 4000,
+    //     isLoop: true
+    // })
+    // this.progress.start(performance.now());
+
+    // function render(now) {
+    //     let progress = this.progress.tick(now)
+    //     canvas.width = 400
+    //     canvas.height = 400
+    //     for (let i = 0; i < confetiiNum; i++) {
+    //         context.save()
+    //         context.translate(sprites[i].position.initX, sprites[i].position.initY + progress*sprites[i].height);
+    //         context.drawImage(sprites[i], -sprites[i].width * Math.abs(Math.cos(Math.PI * 2 * progress))/2, sprites[i].height / 2,  sprites[i].width * Math.abs(Math.cos(Math.PI * 2 * progress)), sprites[i].height);
+    //         context.restore()
+            
+    //     }
+    //     window.requestAnimationFrame(render) 
+    // }
+    // render()
+
+        (function() {
+            var DURATION = 4000,
+                LENGTH = 2;
+            new Confetti({
+                width: window.innerWidth,
+                height: window.innerHeight,
+                length: LENGTH,
+                duration: DURATION
+            });
+        })();
+    </script>
+</body>
+</html>
