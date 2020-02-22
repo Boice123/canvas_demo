@@ -61,6 +61,7 @@
                 rainContext.beginPath();
                 rainContext.moveTo(p.x, p.y);
                 rainContext.lineTo(p.x + p.xs, p.y + p.ys);
+                rainContext.lineWidth = '1'
                 rainContext.stroke()
 
                 p.x += p.xs
@@ -71,7 +72,7 @@
                     p.y = -20;
                 }
             }
-            rainContext.drawImage(rainCanvas, 0, 0);
+            // rainContext.drawImage(rainCanvas, 0, 0);
         }
 
         setInterval(draw, 30)
