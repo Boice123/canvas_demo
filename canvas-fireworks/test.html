@@ -212,6 +212,11 @@
     };
     window.onresize = resize;
     resize();
+    /**
+     * 实现烟花粒子队列上升效果，关键
+     * 新建粒子队列----new Trail
+     * 每一帧往队列的children数组添加particle，去除children中已经结束了生命周期的粒子，并把children里面的粒子都更新位置
+     * */
     </script>
 </body>
 </html>
